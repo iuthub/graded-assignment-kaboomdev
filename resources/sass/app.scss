@@ -1,7 +1,8 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-.no-styles {
-  border: none;
-  background: none;
-  
-}
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';

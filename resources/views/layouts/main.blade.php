@@ -119,9 +119,29 @@
               font-size: 1em;
               cursor: pointer;
             }
+            
+            nav {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0.7em 0;
+              border-bottom: 1px solid rgba(0,0,0,0.3);
+            }
+            nav h5 {
+              font-weight: 400;
+              margin: 0;
+              font-size: 1.2rem;
+            }
+            .subheader {
+              margin: 1.5rem 0;
+            }
+            
         </style>
     </head>
     <body>
+      <x-nav-bar />
+      <x-error-block/>
+      <x-info-block/>
       @yield('content')
     </body>
 </html>

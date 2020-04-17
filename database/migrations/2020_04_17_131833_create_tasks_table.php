@@ -17,6 +17,9 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->timestamps();
+            
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->noDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -27,6 +30,7 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
+        $table->dropForeign('tasks_user_id_foreign');
         Schema::dropIfExists('tasks');
     }
 }

@@ -3,8 +3,7 @@
 @section('title', 'To-Do Main')
 
 @section('content')
-        <x-error-block />
-        <x-info-block :info="$info ?? ''" />
+        
         <form action="/task" method="POST">
             @csrf
             <div id="myDIV" class="header">
@@ -16,7 +15,7 @@
         
         @if (count($tasks))
           <ul id="myUL">
-            @foreach ($tasks as $task)
+            @foreach(auth()->user()->tasks as $task)
               <x-task-item :title="$task->title" :id="$task->id" />
             @endforeach
           </ul>

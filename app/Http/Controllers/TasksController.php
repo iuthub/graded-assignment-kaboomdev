@@ -8,6 +8,13 @@ use App\Task;
 
 class TasksController extends Controller
 {
+    
+    
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
+    
     /**
      * Display a listing of the resource.
      *
@@ -30,18 +37,17 @@ class TasksController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'title' => 'required|regex:/([a-zA-Z]+\s?\b){2,}/'
+        $data = request()->validate([
+            'title' => 'required'
         ]);
-        $task = new Task([
-            'title' => $request->input('title')
-        ]);
-        $task->save();
-
-
+        $info = "Successully saved";
+        
+        if (!auth()->user()->tasks()->create($data)) {
+            $info = "Unsuccessul save";
+        }
 
         return redirect()->back()->with([
-            "info" => "Successfully saved."
+            "info" => $info
         ]);
     }
 
@@ -55,10 +61,10 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-
         $task = Task::findOrFail($id);
-
-
+        
+        $this->authorize('update', $task); 
+        
         return view('pages.edit', [
             'task' => $task
         ]);
@@ -74,16 +80,18 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
 
-        $task = Task::findOrFail($id);
-        
-        $this->validate($request, [
-            'title' => 'required|regex:/([a-zA-Z]+\s?\b){2,}/'
+        $model = \App\Task::findOrFail($task);
+        $data = request()->validate([
+            'title' => 'required'
         ]);
-        $task->title = $request->input('title');
-        $task->save();
+        
+        $info = "Successully updated";
+        if (!$model->update($data)) {
+            $info = "Unsuccesful update";
 
-        return redirect()->back()->with([
-            "info" => "Successfully saved."
+        }
+        return redirect()->route("task.index")->with([
+            "info" => $info
         ]);
     }
 

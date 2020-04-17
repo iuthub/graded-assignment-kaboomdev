@@ -3,8 +3,6 @@
 @section('title', 'To-Do Main')
 
 @section('content')
-        <x-error-block />
-        <x-info-block />
         <form action="/task/{{ $task->id }}" method="POST">
             @csrf
             <div id="myDIV" class="header">
