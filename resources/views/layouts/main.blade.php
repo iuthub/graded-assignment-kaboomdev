@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>@yield('title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -111,50 +111,37 @@
             .addBtn:hover {
               background-color: #bbb;
             }
+            
+            
+            button.no-styles {
+              border: none;
+              background: none;
+              font-size: 1em;
+              cursor: pointer;
+            }
+            
+            nav {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0.7em 0;
+              border-bottom: 1px solid rgba(0,0,0,0.3);
+            }
+            nav h5 {
+              font-weight: 400;
+              margin: 0;
+              font-size: 1.2rem;
+            }
+            .subheader {
+              margin: 1.5rem 0;
+            }
+            
         </style>
     </head>
     <body>
-        <form action="">
-            <div id="myDIV" class="header">
-              <h2>My To Do List</h2>
-              <input type="text" name="newTask" placeholder="Title...">
-              <button type="submit" class="addBtn">Add</button>
-            </div>
-        </form>
-        <ul id="myUL">
-          <li>
-            <div class="task">
-                Hit the gym
-            </div>
-            <div class="action">
-                <a href=""><i class="fa fa-edit"></i></a>
-            </div>
-            <div class="action">
-                <a href=""><i class="fa fa-trash-alt"></i></a> 
-            </div>
-          </li>
-          <li>
-            <div class="task">
-               Make some food
-            </div>
-            <div class="action">
-                <a href=""><i class="fa fa-edit"></i></a>
-            </div>
-            <div class="action">
-                <a href=""><i class="fa fa-trash-alt"></i></a> 
-            </div>
-          </li>
-          <li>
-            <div class="task">
-               Finish quiz
-            </div>
-            <div class="action">
-                <a href=""><i class="fa fa-edit"></i></a>
-            </div>
-            <div class="action">
-                <a href=""><i class="fa fa-trash-alt"></i></a> 
-            </div>
-          </li>
-        </ul>
+      <x-nav-bar />
+      <x-error-block/>
+      <x-info-block/>
+      @yield('content')
     </body>
 </html>

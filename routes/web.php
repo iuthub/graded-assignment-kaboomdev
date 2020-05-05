@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'TasksController@index');
+Route::resource('task', 'TasksController', [
+    'except' => ['create', 'show']
+]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
